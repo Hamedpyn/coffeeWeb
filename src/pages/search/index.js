@@ -1,7 +1,7 @@
 import BreadCrumb from '@/components/modules/BreadCrumb/BreadCrumb'
 import Card from '@/components/modules/Card/Card';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Search() {
   const { query } = useRouter();
