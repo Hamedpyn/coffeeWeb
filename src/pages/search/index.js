@@ -1,8 +1,24 @@
 import BreadCrumb from '@/components/modules/BreadCrumb/BreadCrumb'
 import Card from '@/components/modules/Card/Card';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
-export default function Search({ userSearchResult }) {
+export default function Search() {
+  const { query } = useRouter();
+  const [userSearchResult, setResults] = useState([]);
 
+  useEffect(() => {
+    if (!query.q) return;
+    fetch('http://localhost:4000/menu')
+      .then(res => res.json())
+      .then(data => {
+        const q = query.q.toLowerCase();
+        const filtered = data.filter(i =>
+          i.title.toLowerCase().includes(q) || i.type.toLowerCase().includes(q)
+        );
+        setResults(filtered);
+      });
+  }, [query.q]);
   return (
     <>
       <BreadCrumb label={'Result'} />
@@ -43,16 +59,4 @@ export default function Search({ userSearchResult }) {
 
     </>
   )
-}
-
-export async function getServerSideProps(context) {
-  const res = await fetch('http://localhost:4000/menu')
-  const data = await res.json();
-  const userSearchResult = data.filter(i => (i.title.toLowerCase().includes(context.query.q) || i.type.toLowerCase().includes(context.query.q)))
-  return {
-    props: {
-      userSearchResult
-    }
-  }
-
 }
