@@ -2,14 +2,12 @@
   "name": "coffee-web",
   "version": "0.1.0",
   "private": true,
-  {
-    "scripts": {
-      "dev": "next dev",
-      "build": "json-server --watch ./data/db.json -p 4000 & next build",
-      "start": "next start",
-      "server": "json-server --watch ./data/db.json -p 4000"
-    }
-  }
+  "scripts": {
+    "dev": "next dev",
+    "build": "json-server --watch ./data/db.json -p 4000 & next build",
+    "start": "next start",
+    "server": "json-server --watch ./data/db.json -p 4000"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
